@@ -1,0 +1,624 @@
+/* ============================= */
+/* ESTILOS GENERALES */
+/* ============================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f8f3;
+    color: #1f2d24;
+    line-height: 1.6;
+}
+
+/* ============================= */
+/* BARRA DE NAVEGACIÓN */
+/* ============================= */
+
+.encabezado {
+    min-height: 100vh;
+    background:
+        linear-gradient(rgba(17, 76, 48, 0.75), rgba(17, 76, 48, 0.85)),
+        url("https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1600&q=80");
+    background-size: cover;
+    background-position: center;
+    color: white;
+}
+
+.barra-navegacion {
+    width: 100%;
+    padding: 18px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10, 45, 30, 0.88);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    backdrop-filter: blur(8px);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icono {
+    font-size: 2rem;
+}
+
+.logo h1 {
+    font-size: 1.8rem;
+    letter-spacing: 3px;
+    color: #d9f99d;
+}
+
+.menu {
+    display: flex;
+    list-style: none;
+    gap: 18px;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    color: #b7e86b;
+}
+
+/* ============================= */
+/* HERO / PORTADA */
+/* ============================= */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 8% 60px;
+}
+
+.hero-contenido {
+    max-width: 750px;
+    animation: aparecer 1s ease;
+}
+
+.etiqueta {
+    display: inline-block;
+    background: #d9f99d;
+    color: #1f4d2f;
+    padding: 8px 18px;
+    border-radius: 30px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.hero h2 {
+    font-size: 4rem;
+    line-height: 1.1;
+    margin-bottom: 10px;
+}
+
+.siglas {
+    font-size: 4.5rem;
+    font-weight: bold;
+    color: #b7e86b;
+    letter-spacing: 8px;
+}
+
+.slogan {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 15px 0;
+    color: #eefccf;
+}
+
+.descripcion-hero {
+    font-size: 1.1rem;
+    max-width: 650px;
+    margin-bottom: 30px;
+}
+
+.botones-hero {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.boton-principal,
+.boton-secundario {
+    padding: 14px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.boton-principal {
+    background: #b7e86b;
+    color: #1f4d2f;
+}
+
+.boton-principal:hover {
+    background: #d9f99d;
+    transform: translateY(-4px);
+}
+
+.boton-secundario {
+    border: 2px solid #d9f99d;
+    color: white;
+}
+
+.boton-secundario:hover {
+    background: #d9f99d;
+    color: #1f4d2f;
+    transform: translateY(-4px);
+}
+
+/* ============================= */
+/* SECCIONES GENERALES */
+/* ============================= */
+
+.seccion {
+    padding: 90px 8%;
+}
+
+.seccion h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #1f4d2f;
+    margin-bottom: 20px;
+}
+
+.seccion > p,
+.intro-seccion {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 35px;
+    font-size: 1.1rem;
+}
+
+/* ============================= */
+/* VIDEO */
+/* ============================= */
+
+.video-principal {
+    background: #ffffff;
+}
+
+.contenedor-video {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.video-placeholder {
+    height: 420px;
+    background: linear-gradient(135deg, #1f4d2f, #6ca965);
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
+}
+
+.contenedor-video video {
+    width: 100%;
+    border-radius: 25px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
+}
+
+/* ============================= */
+/* PARTIDO */
+/* ============================= */
+
+.partido {
+    background: #edf7e7;
+}
+
+.tarjeta-destacada {
+    background: white;
+    max-width: 900px;
+    margin: 0 auto 35px;
+    padding: 35px;
+    border-radius: 25px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    border-left: 8px solid #6ca965;
+}
+
+.tarjeta-destacada h3 {
+    color: #1f4d2f;
+    margin-bottom: 12px;
+    font-size: 1.6rem;
+}
+
+.datos-partido {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+.dato {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+    transition: 0.3s;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10);
+}
+
+.dato:hover {
+    transform: translateY(-8px);
+}
+
+.dato h3 {
+    color: #397348;
+    margin-bottom: 10px;
+}
+
+.dato p {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* ============================= */
+/* MISIÓN Y VISIÓN */
+/* ============================= */
+
+.mision {
+    background: #ffffff;
+}
+
+.vision {
+    background: #e7f3ff;
+}
+
+.contenido-seccion {
+    max-width: 850px;
+    margin: auto;
+    background: white;
+    padding: 35px;
+    border-radius: 25px;
+    font-size: 1.2rem;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.10);
+}
+
+/* ============================= */
+/* IDEALES Y PROPUESTAS */
+/* ============================= */
+
+.ideales {
+    background: #f4f8f3;
+}
+
+.grid-tarjetas {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.tarjeta {
+    background: white;
+    padding: 30px;
+    border-radius: 25px;
+    text-align: center;
+    transition: 0.3s;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.10);
+    border-bottom: 6px solid #6ca965;
+}
+
+.tarjeta:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.16);
+}
+
+.icono {
+    font-size: 3rem;
+    margin-bottom: 12px;
+}
+
+.tarjeta h3 {
+    color: #1f4d2f;
+    margin-bottom: 12px;
+}
+
+/* ============================= */
+/* OBJETIVOS */
+/* ============================= */
+
+.objetivos {
+    background: linear-gradient(135deg, #1f4d2f, #6ca965);
+    color: white;
+}
+
+.objetivos h2 {
+    color: white;
+}
+
+.lista-objetivos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 25px;
+}
+
+.objetivo {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 30px;
+    border-radius: 25px;
+    text-align: center;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    transition: 0.3s;
+}
+
+.objetivo:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.04);
+}
+
+.objetivo h3 {
+    font-size: 2.8rem;
+    color: #d9f99d;
+    margin-bottom: 10px;
+}
+
+/* ============================= */
+/* EQUIPO */
+/* ============================= */
+
+.equipo {
+    background: #ffffff;
+}
+
+.grid-equipo {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+.miembro {
+    background: #edf7e7;
+    padding: 25px;
+    border-radius: 20px;
+    text-align: center;
+    transition: 0.3s;
+    border: 2px solid transparent;
+}
+
+.miembro:hover {
+    border-color: #6ca965;
+    transform: translateY(-6px);
+}
+
+.miembro h3 {
+    color: #1f4d2f;
+    margin-bottom: 8px;
+}
+
+/* ============================= */
+/* PROPUESTAS */
+/* ============================= */
+
+.propuestas {
+    background: #edf7e7;
+}
+
+.propuesta {
+    border-bottom: 6px solid #3b82f6;
+}
+
+/* ============================= */
+/* PREGUNTAS INTERACTIVAS */
+/* ============================= */
+
+.preguntas {
+    background: white;
+}
+
+.acordeon {
+    max-width: 850px;
+    margin: auto;
+}
+
+details {
+    background: #edf7e7;
+    margin-bottom: 15px;
+    padding: 20px;
+    border-radius: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+details:hover {
+    background: #dff0d6;
+}
+
+summary {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #1f4d2f;
+}
+
+details p {
+    margin-top: 12px;
+}
+
+/* ============================= */
+/* CONTACTO */
+/* ============================= */
+
+.contacto {
+    background: linear-gradient(135deg, #e7f3ff, #edf7e7);
+}
+
+.formulario {
+    max-width: 650px;
+    margin: auto;
+    background: white;
+    padding: 35px;
+    border-radius: 25px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.formulario label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #1f4d2f;
+}
+
+.formulario input,
+.formulario textarea {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 20px;
+    border: 2px solid #d3e6ce;
+    border-radius: 14px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.formulario input:focus,
+.formulario textarea:focus {
+    border-color: #6ca965;
+}
+
+.formulario button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 30px;
+    background: #1f4d2f;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.formulario button:hover {
+    background: #397348;
+    transform: translateY(-3px);
+}
+
+/* ============================= */
+/* PIE DE PÁGINA */
+/* ============================= */
+
+.pie-pagina {
+    background: #0f2f1f;
+    color: white;
+    text-align: center;
+    padding: 30px 8%;
+}
+
+.pie-pagina p {
+    margin-bottom: 8px;
+}
+
+/* ============================= */
+/* ANIMACIONES */
+/* ============================= */
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============================= */
+/* DISEÑO RESPONSIVE */
+/* ============================= */
+
+@media screen and (max-width: 1100px) {
+    .menu {
+        gap: 12px;
+    }
+
+    .menu a {
+        font-size: 0.85rem;
+    }
+
+    .grid-tarjetas,
+    .datos-partido,
+    .lista-objetivos,
+    .grid-equipo {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero h2 {
+        font-size: 3.2rem;
+    }
+}
+
+@media screen and (max-width: 760px) {
+    .barra-navegacion {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px 5%;
+    }
+
+    .menu {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .hero {
+        padding-top: 190px;
+        text-align: center;
+    }
+
+    .hero h2 {
+        font-size: 2.5rem;
+    }
+
+    .siglas {
+        font-size: 3.5rem;
+    }
+
+    .botones-hero {
+        justify-content: center;
+    }
+
+    .seccion {
+        padding: 70px 6%;
+    }
+
+    .grid-tarjetas,
+    .datos-partido,
+    .lista-objetivos,
+    .grid-equipo {
+        grid-template-columns: 1fr;
+    }
+
+    .video-placeholder {
+        height: 280px;
+        font-size: 1.4rem;
+        text-align: center;
+        padding: 20px;
+    }
+}
