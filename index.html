@@ -5,26 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SEA | Sociedad Educativa Ambientalista</title>
 
-    <!-- Aquí conectaremos después el CSS -->
+    <!-- Archivo de estilos -->
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
     <!-- ENCABEZADO / BANNER PRINCIPAL -->
     <header class="encabezado" id="inicio">
+
         <nav class="barra-navegacion">
             <div class="logo">
                 <span class="logo-icono">🌱</span>
                 <h1>SEA</h1>
             </div>
 
-            <ul class="menu">
+            <!-- Botón para menú en celular -->
+            <button class="boton-menu" id="boton-menu" aria-label="Abrir menú">
+                ☰
+            </button>
+
+            <ul class="menu" id="menu">
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#partido">Partido</a></li>
                 <li><a href="#mision">Misión</a></li>
                 <li><a href="#vision">Visión</a></li>
                 <li><a href="#ideales">Ideales</a></li>
                 <li><a href="#objetivos">Objetivos</a></li>
+                <li><a href="#candidata">Candidata</a></li>
                 <li><a href="#equipo">Equipo</a></li>
                 <li><a href="#propuestas">Propuestas</a></li>
                 <li><a href="#contacto">Participa</a></li>
@@ -32,11 +39,17 @@
         </nav>
 
         <section class="hero">
-            <div class="hero-contenido">
+            <div class="hero-contenido animado animado-izquierda">
                 <p class="etiqueta">Partido escolar ambientalista</p>
+
                 <h2>Sociedad Educativa Ambientalista</h2>
+
                 <p class="siglas">SEA</p>
-                <p class="slogan">“Educar para cuidar, cuidar para vivir”</p>
+
+                <p class="slogan">
+                    “Educar para cuidar, cuidar para vivir”
+                </p>
+
                 <p class="descripcion-hero">
                     Con Bárbara al frente, el cambio se siente.
                     Promovemos una sociedad educada, participativa y comprometida
@@ -45,7 +58,16 @@
 
                 <div class="botones-hero">
                     <a href="#video" class="boton-principal">Ver video</a>
-                    <a href="#propuestas" class="boton-secundario">Conoce nuestras propuestas</a>
+                    <a href="#candidata" class="boton-secundario">Conoce a la candidata</a>
+                </div>
+            </div>
+
+            <div class="hero-imagen animado animado-derecha">
+                <div class="marco-imagen imagen-principal">
+                    <span>Imagen principal del partido</span>
+
+                    <img src="resources/imgB/img-2.jpeg" alt="Imagen principal del partido SEA">
+                    
                 </div>
             </div>
         </section>
@@ -55,59 +77,85 @@
     <main>
 
         <!-- VIDEO PRINCIPAL -->
-        <section class="seccion video-principal" id="video">
-            <h2>Mensaje principal de campaña</h2>
-            <p>
-                En esta sección podrás colocar el video principal de tu partido.
-            </p>
+        <section class="seccion video-principal animado" id="video">
+            <div class="encabezado-seccion">
+                <p class="subtitulo-seccion">Mensaje de campaña</p>
+                <h2>Video principal</h2>
+                <p>
+                    En esta sección podrás colocar el video oficial del partido.
+                </p>
+            </div>
 
             <div class="contenedor-video">
                 <!-- 
-                    Cuando tengas tu video, puedes reemplazar este bloque.
-                    Ejemplo:
-                    <video controls>
-                        <source src="video-campaña.mp4" type="video/mp4">
-                        Tu navegador no soporta videos.
-                    </video>
+                Cuando tengas tu video, reemplaza el bloque de abajo por esto:
+
+                <video controls>
+                    <source src="videos/video-campaña.mp4" type="video/mp4">
+                    Tu navegador no soporta videos.
+                </video>
                 -->
 
                 <div class="video-placeholder">
-                    <p>🎥 Aquí irá el video de campaña</p>
+                    <p>Aquí irá el video de campaña</p>
                 </div>
             </div>
         </section>
 
         <!-- INFORMACIÓN DEL PARTIDO -->
         <section class="seccion partido" id="partido">
-            <h2>¿Quiénes somos?</h2>
-
-            <div class="tarjeta-destacada">
-                <h3>Partido: Sociedad Educativa Ambientalista</h3>
+            <div class="encabezado-seccion animado">
+                <p class="subtitulo-seccion">Nuestra identidad</p>
+                <h2>¿Quiénes somos?</h2>
                 <p>
-                    Somos un partido escolar que busca promover la educación ambiental,
-                    la participación ciudadana y el respeto por el medio ambiente.
-                    Nuestro objetivo es construir una comunidad más consciente,
-                    responsable y comprometida con el futuro del planeta.
+                    Somos un partido escolar que une educación, conciencia ambiental
+                    y participación ciudadana.
                 </p>
             </div>
 
+            <div class="bloque-doble">
+                <div class="tarjeta-destacada animado animado-izquierda">
+                    <h3>Partido: Sociedad Educativa Ambientalista</h3>
+                    <p>
+                        SEA es una propuesta escolar que busca promover el cuidado
+                        del medio ambiente mediante la educación, la participación
+                        de los estudiantes y el compromiso social.
+                    </p>
+
+                    <p>
+                        Nuestro partido representa una comunidad que aprende,
+                        propone y actúa para construir espacios más limpios,
+                        responsables y sostenibles.
+                    </p>
+                </div>
+
+                <div class="marco-imagen animado animado-derecha">
+                    <span>Imagen del partido o logotipo</span>
+
+                    <!-- 
+                    Ejemplo:
+                    <img src="imagenes/logo-sea.png" alt="Logotipo del partido SEA">
+                    -->
+                </div>
+            </div>
+
             <div class="datos-partido">
-                <article class="dato">
+                <article class="dato animado">
                     <h3>Siglas</h3>
                     <p>SEA</p>
                 </article>
 
-                <article class="dato">
+                <article class="dato animado">
                     <h3>Candidata</h3>
                     <p>Bárbara</p>
                 </article>
 
-                <article class="dato">
+                <article class="dato animado">
                     <h3>Suplente</h3>
                     <p>Pablo</p>
                 </article>
 
-                <article class="dato">
+                <article class="dato animado">
                     <h3>Jefa de campaña</h3>
                     <p>Andrea</p>
                 </article>
@@ -116,64 +164,123 @@
 
         <!-- MISIÓN -->
         <section class="seccion mision" id="mision">
-            <h2>Misión</h2>
+            <div class="bloque-doble">
+                <div class="contenido-seccion animado animado-izquierda">
+                    <p class="subtitulo-seccion">Lo que hacemos</p>
+                    <h2>Misión</h2>
 
-            <div class="contenido-seccion">
-                <p>
-                    Impulsar la educación ambiental y la participación ciudadana
-                    para fomentar una cultura de respeto, conservación y cuidado
-                    del medio ambiente, contribuyendo al desarrollo sostenible
-                    de la sociedad.
-                </p>
+                    <p>
+                        Impulsar la educación ambiental y la participación ciudadana
+                        para fomentar una cultura de respeto, conservación y cuidado
+                        del medio ambiente, contribuyendo al desarrollo sostenible
+                        de la sociedad.
+                    </p>
+                </div>
+
+                <div class="marco-imagen animado animado-derecha">
+                    <span>Imagen sobre educación ambiental</span>
+
+                    <!-- 
+                    Ejemplo:
+                    <img src="imagenes/educacion-ambiental.jpg" alt="Estudiantes participando en educación ambiental">
+                    -->
+                </div>
             </div>
         </section>
 
         <!-- VISIÓN -->
         <section class="seccion vision" id="vision">
-            <h2>Visión</h2>
+            <div class="bloque-doble bloque-invertido">
+                <div class="marco-imagen animado animado-izquierda">
+                    <span>Imagen sobre futuro sostenible</span>
 
-            <div class="contenido-seccion">
-                <p>
-                    Construir una sociedad educada y comprometida con el cuidado
-                    del medio ambiente, donde la sostenibilidad, la participación
-                    ciudadana y la educación sean la base de un futuro mejor
-                    para todos.
-                </p>
+                    <!-- 
+                    Ejemplo:
+                    <img src="imagenes/futuro-sostenible.jpg" alt="Futuro sostenible y cuidado ambiental">
+                    -->
+                </div>
+
+                <div class="contenido-seccion animado animado-derecha">
+                    <p class="subtitulo-seccion">Hacia dónde vamos</p>
+                    <h2>Visión</h2>
+
+                    <p>
+                        Construir una sociedad educada y comprometida con el cuidado
+                        del medio ambiente, donde la sostenibilidad, la participación
+                        ciudadana y la educación sean la base de un futuro mejor
+                        para todos.
+                    </p>
+                </div>
             </div>
         </section>
 
         <!-- IDEALES -->
         <section class="seccion ideales" id="ideales">
-            <h2>Nuestros ideales</h2>
+            <div class="encabezado-seccion animado">
+                <p class="subtitulo-seccion">Nuestros principios</p>
+                <h2>Ideales de SEA</h2>
+                <p>
+                    Estos valores guían nuestras propuestas y acciones como partido escolar.
+                </p>
+            </div>
 
             <div class="grid-tarjetas">
-                <article class="tarjeta">
-                    <div class="icono">🌎</div>
+                <article class="tarjeta animado">
+                    <div class="icono-contenedor" style="--icono-tamano: 70px;">
+                        <span>Icono</span>
+
+                        <!-- 
+                        También puedes usar una imagen:
+                        <img src="imagenes/icono-medio-ambiente.png" alt="Icono de respeto ambiental">
+                        -->
+                    </div>
+
                     <h3>Respeto ambiental</h3>
                     <p>
                         Defendemos el medio ambiente como base del bienestar social.
                     </p>
                 </article>
 
-                <article class="tarjeta">
-                    <div class="icono">📚</div>
+                <article class="tarjeta animado">
+                    <div class="icono-contenedor" style="--icono-tamano: 70px;">
+                        <span>Icono</span>
+
+                        <!-- 
+                        <img src="imagenes/icono-educacion.png" alt="Icono de educación ambiental">
+                        -->
+                    </div>
+
                     <h3>Educación ambiental</h3>
                     <p>
                         Buscamos formar ciudadanos responsables y conscientes de su entorno.
                     </p>
                 </article>
 
-                <article class="tarjeta">
-                    <div class="icono">🤝</div>
+                <article class="tarjeta animado">
+                    <div class="icono-contenedor" style="--icono-tamano: 70px;">
+                        <span>Icono</span>
+
+                        <!-- 
+                        <img src="imagenes/icono-participacion.png" alt="Icono de participación ciudadana">
+                        -->
+                    </div>
+
                     <h3>Participación ciudadana</h3>
                     <p>
-                        Promovemos la toma de decisiones colectivas para cuidar el planeta.
+                        Promovemos la toma de decisiones relacionadas con el cuidado del planeta.
                     </p>
                 </article>
 
-                <article class="tarjeta">
-                    <div class="icono">⚖️</div>
-                    <h3>Igualdad y justicia ambiental</h3>
+                <article class="tarjeta animado">
+                    <div class="icono-contenedor" style="--icono-tamano: 70px;">
+                        <span>Icono</span>
+
+                        <!-- 
+                        <img src="imagenes/icono-justicia.png" alt="Icono de justicia ambiental">
+                        -->
+                    </div>
+
+                    <h3>Justicia ambiental</h3>
                     <p>
                         Creemos que todas las personas deben tener acceso a un entorno sano.
                     </p>
@@ -183,71 +290,159 @@
 
         <!-- OBJETIVOS -->
         <section class="seccion objetivos" id="objetivos">
-            <h2>Objetivos</h2>
+            <div class="encabezado-seccion animado">
+                <p class="subtitulo-seccion">Metas principales</p>
+                <h2>Objetivos</h2>
+                <p>
+                    Nuestras acciones se enfocan en mejorar la comunidad escolar
+                    mediante educación, participación y conciencia ambiental.
+                </p>
+            </div>
 
             <div class="lista-objetivos">
-                <article class="objetivo">
+                <article class="objetivo animado">
                     <h3>01</h3>
                     <p>Fomentar el respeto por el medio ambiente.</p>
                 </article>
 
-                <article class="objetivo">
+                <article class="objetivo animado">
                     <h3>02</h3>
                     <p>Impulsar una educación de calidad con conciencia ambiental.</p>
                 </article>
 
-                <article class="objetivo">
+                <article class="objetivo animado">
                     <h3>03</h3>
                     <p>Promover la participación ciudadana activa.</p>
                 </article>
 
-                <article class="objetivo">
+                <article class="objetivo animado">
                     <h3>04</h3>
                     <p>Defender la igualdad y la justicia ambiental.</p>
                 </article>
             </div>
         </section>
 
+        <!-- CANDIDATA PRINCIPAL -->
+        <section class="seccion candidata" id="candidata">
+            <div class="encabezado-seccion animado">
+                <p class="subtitulo-seccion">Nuestra representante</p>
+                <h2>Conoce a nuestra candidata</h2>
+                <p>
+                    Bárbara encabeza este proyecto escolar con compromiso,
+                    liderazgo y una visión ambientalista.
+                </p>
+            </div>
+
+            <div class="perfil-candidata">
+                <div class="foto-candidata animado animado-izquierda">
+                    <div class="marco-imagen imagen-candidata">
+                        <img src="resources/imgB/img-1.jpeg" alt="Bárbara, candidata del partido SEA">
+                    </div>
+                </div>
+
+                <div class="info-candidata animado animado-derecha">
+                    <p class="cargo-candidata">Candidata principal</p>
+                    <h3>Bárbara</h3>
+
+                    <p>
+                        Bárbara representa el compromiso de SEA con la educación,
+                        la participación ciudadana y el cuidado del medio ambiente.
+                        Su liderazgo busca motivar a los estudiantes a involucrarse
+                        en acciones positivas para mejorar la escuela y su entorno.
+                    </p>
+
+                    <p>
+                        Su campaña se basa en escuchar ideas, impulsar propuestas
+                        ambientales y promover una comunidad escolar más responsable,
+                        justa y participativa.
+                    </p>
+
+                    <div class="frase-candidata">
+                        <p>
+                            “Con Bárbara al frente, el cambio se siente.”
+                        </p>
+                    </div>
+
+                    <div class="acciones-candidata">
+                        <a href="#propuestas" class="boton-principal">Ver propuestas</a>
+                        <a href="#contacto" class="boton-secundario boton-verde">Participar</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- EQUIPO DE CAMPAÑA -->
         <section class="seccion equipo" id="equipo">
-            <h2>Equipo de campaña</h2>
-            <p class="intro-seccion">
-                Nuestro equipo está formado por estudiantes comprometidos con la educación,
-                el ambiente y la participación social.
-            </p>
+            <div class="encabezado-seccion animado">
+                <p class="subtitulo-seccion">Quienes hacen posible el proyecto</p>
+                <h2>Equipo de campaña</h2>
+                <p>
+                    Después de nuestra candidata, este es el equipo que apoya,
+                    organiza y fortalece las propuestas de SEA.
+                </p>
+            </div>
 
             <div class="grid-equipo">
-                <article class="miembro">
-                    <h3>Bárbara</h3>
-                    <p>Candidata</p>
-                </article>
-
-                <article class="miembro">
+                <article class="miembro animado">
+                    <div class="avatar-miembro">
+                        <span>P</span>
+                    </div>
                     <h3>Pablo</h3>
                     <p>Suplente</p>
                 </article>
 
-                <article class="miembro">
+                <article class="miembro animado">
+                    <div class="avatar-miembro">
+                        <span>A</span>
+                    </div>
                     <h3>Andrea</h3>
                     <p>Jefa de campaña</p>
                 </article>
 
-                <article class="miembro">
+                <article class="miembro animado">
+                    <div class="avatar-miembro">
+                        <span>X</span>
+                    </div>
                     <h3>Ximena</h3>
                     <p>Líder del partido</p>
                 </article>
 
-                <article class="miembro">
+                <article class="miembro animado">
+                    <div class="avatar-miembro">
+                        <span>A</span>
+                    </div>
                     <h3>Alondra</h3>
                     <p>Coordinadora</p>
                 </article>
 
-                <article class="miembro">
-                    <h3>Lore, Ángel y Juanjo</h3>
+                <article class="miembro animado">
+                    <div class="avatar-miembro">
+                        <span>L</span>
+                    </div>
+                    <h3>Lore</h3>
                     <p>Comunicación</p>
                 </article>
 
-                <article class="miembro">
+                <article class="miembro animado">
+                    <div class="avatar-miembro">
+                        <span>A</span>
+                    </div>
+                    <h3>Ángel</h3>
+                    <p>Comunicación</p>
+                </article>
+
+                <article class="miembro animado">
+                    <div class="avatar-miembro">
+                        <span>J</span>
+                    </div>
+                    <h3>Juanjo</h3>
+                    <p>Comunicación</p>
+                </article>
+
+                <article class="miembro animado">
+                    <div class="avatar-miembro">
+                        <span>C</span>
+                    </div>
                     <h3>Carmen</h3>
                     <p>Jefa de materiales</p>
                 </article>
@@ -256,10 +451,25 @@
 
         <!-- PROPUESTAS -->
         <section class="seccion propuestas" id="propuestas">
-            <h2>Propuestas principales</h2>
+            <div class="encabezado-seccion animado">
+                <p class="subtitulo-seccion">Acciones de campaña</p>
+                <h2>Propuestas principales</h2>
+                <p>
+                    Estas propuestas buscan mejorar la escuela y fortalecer
+                    la conciencia ambiental de la comunidad estudiantil.
+                </p>
+            </div>
 
             <div class="grid-tarjetas">
-                <article class="tarjeta propuesta">
+                <article class="tarjeta propuesta animado">
+                    <div class="icono-contenedor" style="--icono-tamano: 70px;">
+                        <span>Icono</span>
+
+                        <!-- 
+                        <img src="imagenes/icono-limpieza.png" alt="Icono de campañas de limpieza">
+                        -->
+                    </div>
+
                     <h3>Campañas de limpieza</h3>
                     <p>
                         Organizar jornadas escolares para limpiar espacios comunes
@@ -267,7 +477,15 @@
                     </p>
                 </article>
 
-                <article class="tarjeta propuesta">
+                <article class="tarjeta propuesta animado">
+                    <div class="icono-contenedor" style="--icono-tamano: 70px;">
+                        <span>Icono</span>
+
+                        <!-- 
+                        <img src="imagenes/icono-reciclaje.png" alt="Icono de separación de residuos">
+                        -->
+                    </div>
+
                     <h3>Separación de residuos</h3>
                     <p>
                         Promover el uso de botes diferenciados para basura orgánica,
@@ -275,7 +493,15 @@
                     </p>
                 </article>
 
-                <article class="tarjeta propuesta">
+                <article class="tarjeta propuesta animado">
+                    <div class="icono-contenedor" style="--icono-tamano: 70px;">
+                        <span>Icono</span>
+
+                        <!-- 
+                        <img src="imagenes/icono-educacion-ambiental.png" alt="Icono de educación ambiental">
+                        -->
+                    </div>
+
                     <h3>Educación ambiental</h3>
                     <p>
                         Realizar actividades, carteles y dinámicas para enseñar
@@ -283,7 +509,15 @@
                     </p>
                 </article>
 
-                <article class="tarjeta propuesta">
+                <article class="tarjeta propuesta animado">
+                    <div class="icono-contenedor" style="--icono-tamano: 70px;">
+                        <span>Icono</span>
+
+                        <!-- 
+                        <img src="imagenes/icono-participacion-estudiantil.png" alt="Icono de participación estudiantil">
+                        -->
+                    </div>
+
                     <h3>Participación estudiantil</h3>
                     <p>
                         Escuchar ideas de los estudiantes para mejorar el ambiente
@@ -291,18 +525,45 @@
                     </p>
                 </article>
             </div>
+
+            <div class="galeria-propuestas">
+                <div class="marco-imagen animado animado-izquierda">
+                    <span>Imagen de campaña ambiental</span>
+
+                    <!-- 
+                    Ejemplo:
+                    <img src="imagenes/campana-limpieza.jpg" alt="Campaña de limpieza escolar">
+                    -->
+                </div>
+
+                <div class="marco-imagen animado animado-derecha">
+                    <span>Imagen de actividades escolares</span>
+
+                    <!-- 
+                    Ejemplo:
+                    <img src="imagenes/actividad-escolar.jpg" alt="Actividad escolar ambientalista">
+                    -->
+                </div>
+            </div>
         </section>
 
         <!-- SECCIÓN INTERACTIVA -->
-        <section class="seccion preguntas">
-            <h2>Conoce más sobre SEA</h2>
+        <section class="seccion preguntas" id="preguntas">
+            <div class="encabezado-seccion animado">
+                <p class="subtitulo-seccion">Información rápida</p>
+                <h2>Conoce más sobre SEA</h2>
+                <p>
+                    Resuelve algunas dudas importantes sobre nuestro partido.
+                </p>
+            </div>
 
-            <div class="acordeon">
+            <div class="acordeon animado">
                 <details>
                     <summary>¿Por qué elegir a SEA?</summary>
                     <p>
-                        Porque buscamos unir educación, conciencia ambiental y participación
-                        ciudadana para construir una comunidad más responsable.
+                        Porque buscamos unir educación, conciencia ambiental
+                        y participación ciudadana para construir una comunidad
+                        más responsable.
                     </p>
                 </details>
 
@@ -321,29 +582,51 @@
                         respeto y acción a favor del planeta.
                     </p>
                 </details>
+
+                <details>
+                    <summary>¿Qué buscamos mejorar?</summary>
+                    <p>
+                        Buscamos mejorar la conciencia ambiental, la participación
+                        estudiantil y los hábitos de cuidado dentro de la escuela.
+                    </p>
+                </details>
             </div>
         </section>
 
         <!-- PARTICIPA / CONTACTO -->
         <section class="seccion contacto" id="contacto">
-            <h2>Participa con nosotros</h2>
-            <p>
-                Tu voz también cuenta. Comparte tus ideas para mejorar nuestra escuela
-                y cuidar el medio ambiente.
-            </p>
+            <div class="encabezado-seccion animado">
+                <p class="subtitulo-seccion">Tu opinión importa</p>
+                <h2>Participa con nosotros</h2>
+                <p>
+                    Comparte tus ideas para mejorar nuestra escuela y cuidar
+                    el medio ambiente.
+                </p>
+            </div>
 
-            <form class="formulario">
-                <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre">
+            <div class="bloque-doble">
+                <form class="formulario animado animado-izquierda">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre">
 
-                <label for="grupo">Grupo</label>
-                <input type="text" id="grupo" name="grupo" placeholder="Escribe tu grupo">
+                    <label for="grupo">Grupo</label>
+                    <input type="text" id="grupo" name="grupo" placeholder="Escribe tu grupo">
 
-                <label for="idea">Tu propuesta</label>
-                <textarea id="idea" name="idea" rows="5" placeholder="Escribe tu idea o propuesta"></textarea>
+                    <label for="idea">Tu propuesta</label>
+                    <textarea id="idea" name="idea" rows="5" placeholder="Escribe tu idea o propuesta"></textarea>
 
-                <button type="submit">Enviar propuesta</button>
-            </form>
+                    <button type="submit">Enviar propuesta</button>
+                </form>
+
+                <div class="marco-imagen animado animado-derecha">
+                    <span>Imagen de participación ciudadana</span>
+
+                    <!-- 
+                    Ejemplo:
+                    <img src="imagenes/participacion.jpg" alt="Participación ciudadana estudiantil">
+                    -->
+                </div>
+            </div>
         </section>
 
     </main>
@@ -355,5 +638,7 @@
         <p>Actividad escolar de simulación política</p>
     </footer>
 
+    <!-- Archivo JavaScript -->
+    <script src="script.js"></script>
 </body>
 </html>

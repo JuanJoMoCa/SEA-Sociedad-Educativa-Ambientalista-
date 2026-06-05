@@ -5,49 +5,99 @@
 document.addEventListener("DOMContentLoaded", function () {
 
     /* ============================= */
-    /* NAVEGACIÓN SUAVE */
+    /* VARIABLES PRINCIPALES */
     /* ============================= */
 
+    const barra = document.querySelector(".barra-navegacion");
+    const botonMenu = document.querySelector("#boton-menu");
+    const menu = document.querySelector("#menu");
     const enlacesMenu = document.querySelectorAll(".menu a");
+    const secciones = document.querySelectorAll("header[id], section[id]");
+    const formulario = document.querySelector(".formulario");
 
-    enlacesMenu.forEach(enlace => {
+
+    /* ============================= */
+    /* MENÚ RESPONSIVE */
+    /* ============================= */
+
+    if (botonMenu && menu) {
+        botonMenu.addEventListener("click", function () {
+            menu.classList.toggle("activo");
+
+            if (menu.classList.contains("activo")) {
+                botonMenu.textContent = "×";
+                botonMenu.setAttribute("aria-label", "Cerrar menú");
+            } else {
+                botonMenu.textContent = "☰";
+                botonMenu.setAttribute("aria-label", "Abrir menú");
+            }
+        });
+    }
+
+
+    /* ============================= */
+    /* NAVEGACIÓN SUAVE PARA TODOS LOS ENLACES INTERNOS */
+    /* ============================= */
+
+    const enlacesInternos = document.querySelectorAll('a[href^="#"]');
+
+    enlacesInternos.forEach(enlace => {
         enlace.addEventListener("click", function (evento) {
-            evento.preventDefault();
+            const destino = this.getAttribute("href");
 
-            const idSeccion = this.getAttribute("href");
-            const seccion = document.querySelector(idSeccion);
+            if (destino.length > 1) {
+                const seccionDestino = document.querySelector(destino);
 
-            if (seccion) {
-                const alturaMenu = document.querySelector(".barra-navegacion").offsetHeight;
+                if (seccionDestino) {
+                    evento.preventDefault();
 
-                window.scrollTo({
-                    top: seccion.offsetTop - alturaMenu,
-                    behavior: "smooth"
-                });
+                    const alturaBarra = barra ? barra.offsetHeight : 0;
+                    const posicionDestino = seccionDestino.offsetTop - alturaBarra + 5;
+
+                    window.scrollTo({
+                        top: posicionDestino,
+                        behavior: "smooth"
+                    });
+
+                    cerrarMenuMovil();
+                }
             }
         });
     });
 
 
+    function cerrarMenuMovil() {
+        if (menu && menu.classList.contains("activo")) {
+            menu.classList.remove("activo");
+
+            if (botonMenu) {
+                botonMenu.textContent = "☰";
+                botonMenu.setAttribute("aria-label", "Abrir menú");
+            }
+        }
+    }
+
+
     /* ============================= */
-    /* MARCAR APARTADO ACTIVO DEL MENÚ */
+    /* APARTADO ACTIVO DEL MENÚ */
     /* ============================= */
 
-    const secciones = document.querySelectorAll("section, header");
-
-    function activarMenu() {
-        let posicionScroll = window.scrollY + 180;
+    function activarEnlaceMenu() {
+        let posicionActual = window.scrollY + 180;
 
         secciones.forEach(seccion => {
-            const top = seccion.offsetTop;
-            const alto = seccion.offsetHeight;
-            const id = seccion.getAttribute("id");
+            const inicioSeccion = seccion.offsetTop;
+            const altoSeccion = seccion.offsetHeight;
+            const idSeccion = seccion.getAttribute("id");
 
-            if (posicionScroll >= top && posicionScroll < top + alto) {
+            if (
+                posicionActual >= inicioSeccion &&
+                posicionActual < inicioSeccion + altoSeccion
+            ) {
                 enlacesMenu.forEach(enlace => {
                     enlace.classList.remove("activo");
 
-                    if (enlace.getAttribute("href") === "#" + id) {
+                    if (enlace.getAttribute("href") === "#" + idSeccion) {
                         enlace.classList.add("activo");
                     }
                 });
@@ -55,36 +105,64 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    window.addEventListener("scroll", activarMenu);
+    window.addEventListener("scroll", activarEnlaceMenu);
+    activarEnlaceMenu();
 
 
     /* ============================= */
-    /* ANIMACIÓN AL APARECER SECCIONES */
+    /* CAMBIO VISUAL DE BARRA AL HACER SCROLL */
     /* ============================= */
 
-    const elementosAnimados = document.querySelectorAll(
-        ".seccion, .tarjeta, .dato, .objetivo, .miembro, .tarjeta-destacada"
-    );
+    function cambiarBarraScroll() {
+        if (!barra) return;
 
-    elementosAnimados.forEach(elemento => {
-        elemento.style.opacity = "0";
-        elemento.style.transform = "translateY(35px)";
-        elemento.style.transition = "opacity 0.7s ease, transform 0.7s ease";
-    });
+        if (window.scrollY > 80) {
+            barra.style.background = "rgba(10, 45, 30, 0.97)";
+            barra.style.boxShadow = "0 5px 20px rgba(0, 0, 0, 0.25)";
+            barra.style.padding = "12px 7%";
+        } else {
+            barra.style.background = "rgba(10, 45, 30, 0.88)";
+            barra.style.boxShadow = "none";
+            barra.style.padding = "16px 7%";
+        }
+    }
 
-    const observador = new IntersectionObserver(function (entradas) {
+    window.addEventListener("scroll", cambiarBarraScroll);
+    cambiarBarraScroll();
+
+
+    /* ============================= */
+    /* ANIMACIONES SUAVES AL DESPLAZARSE */
+    /* ============================= */
+
+    const elementosAnimados = document.querySelectorAll(".animado");
+
+    const observadorAnimaciones = new IntersectionObserver(function (entradas) {
         entradas.forEach(entrada => {
             if (entrada.isIntersecting) {
-                entrada.target.style.opacity = "1";
-                entrada.target.style.transform = "translateY(0)";
+                entrada.target.classList.add("visible");
             }
         });
     }, {
         threshold: 0.15
     });
 
-    elementosAnimados.forEach(elemento => {
-        observador.observe(elemento);
+    elementosAnimados.forEach((elemento, index) => {
+        elemento.style.transitionDelay = `${Math.min(index * 0.03, 0.25)}s`;
+        observadorAnimaciones.observe(elemento);
+    });
+
+
+    /* ============================= */
+    /* EFECTO EXTRA EN TARJETAS */
+    /* ============================= */
+
+    const tarjetas = document.querySelectorAll(".tarjeta, .dato, .objetivo, .miembro");
+
+    tarjetas.forEach(tarjeta => {
+        tarjeta.addEventListener("mouseenter", function () {
+            this.style.cursor = "pointer";
+        });
     });
 
 
@@ -108,10 +186,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* ============================= */
-    /* FORMULARIO DE PROPUESTAS */
+    /* EFECTO INTERACTIVO EN VIDEO */
     /* ============================= */
 
-    const formulario = document.querySelector(".formulario");
+    const videoPlaceholder = document.querySelector(".video-placeholder");
+
+    if (videoPlaceholder) {
+        videoPlaceholder.addEventListener("click", function () {
+            this.innerHTML = `
+                <p>Próximamente aquí se mostrará el video oficial de SEA</p>
+            `;
+
+            this.style.transform = "scale(1.02)";
+
+            setTimeout(() => {
+                this.style.transform = "scale(1)";
+            }, 300);
+        });
+    }
+
+
+    /* ============================= */
+    /* FORMULARIO DE PROPUESTAS */
+    /* ============================= */
 
     if (formulario) {
         formulario.addEventListener("submit", function (evento) {
@@ -122,20 +219,19 @@ document.addEventListener("DOMContentLoaded", function () {
             const idea = document.querySelector("#idea").value.trim();
 
             if (nombre === "" || grupo === "" || idea === "") {
-                mostrarMensaje("Por favor, completa todos los campos.", "error");
+                mostrarMensajeFormulario("Por favor, completa todos los campos.", "error");
                 return;
             }
 
-            const propuesta = {
+            const nuevaPropuesta = {
                 nombre: nombre,
                 grupo: grupo,
                 idea: idea,
-                fecha: new Date().toLocaleDateString()
+                fecha: new Date().toLocaleDateString("es-MX")
             };
 
-            guardarPropuesta(propuesta);
-            mostrarMensaje("¡Gracias por compartir tu propuesta ambiental!", "exito");
-
+            guardarPropuesta(nuevaPropuesta);
+            mostrarMensajeFormulario("Gracias por compartir tu propuesta ambiental.", "exito");
             formulario.reset();
             mostrarPropuestasGuardadas();
         });
@@ -147,7 +243,9 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.setItem("propuestasSEA", JSON.stringify(propuestas));
     }
 
-    function mostrarMensaje(texto, tipo) {
+    function mostrarMensajeFormulario(texto, tipo) {
+        if (!formulario) return;
+
         let mensaje = document.querySelector(".mensaje-formulario");
 
         if (!mensaje) {
@@ -204,80 +302,39 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-        contenedor.innerHTML = `
-            <h3>Últimas propuestas recibidas</h3>
-            <div class="lista-propuestas-js"></div>
-        `;
+        contenedor.innerHTML = "";
 
-        const lista = contenedor.querySelector(".lista-propuestas-js");
+        const titulo = document.createElement("h3");
+        titulo.textContent = "Últimas propuestas recibidas";
+
+        const lista = document.createElement("div");
+        lista.classList.add("lista-propuestas-js");
 
         propuestas.slice(-3).reverse().forEach(propuesta => {
             const tarjeta = document.createElement("article");
             tarjeta.classList.add("tarjeta-propuesta-js");
 
-            tarjeta.innerHTML = `
-                <h4>${propuesta.nombre} - ${propuesta.grupo}</h4>
-                <p>${propuesta.idea}</p>
-                <small>Enviada el ${propuesta.fecha}</small>
-            `;
+            const encabezado = document.createElement("h4");
+            encabezado.textContent = `${propuesta.nombre} - ${propuesta.grupo}`;
+
+            const texto = document.createElement("p");
+            texto.textContent = propuesta.idea;
+
+            const fecha = document.createElement("small");
+            fecha.textContent = `Enviada el ${propuesta.fecha}`;
+
+            tarjeta.appendChild(encabezado);
+            tarjeta.appendChild(texto);
+            tarjeta.appendChild(fecha);
 
             lista.appendChild(tarjeta);
         });
 
-        aplicarEstilosPropuestasJS();
-    }
-
-    function aplicarEstilosPropuestasJS() {
-        const contenedor = document.querySelector(".propuestas-guardadas");
-
-        if (!contenedor) return;
-
-        contenedor.style.maxWidth = "850px";
-        contenedor.style.margin = "35px auto 0";
-        contenedor.style.background = "white";
-        contenedor.style.padding = "25px";
-        contenedor.style.borderRadius = "25px";
-        contenedor.style.boxShadow = "0 10px 25px rgba(0, 0, 0, 0.12)";
-
-        const titulo = contenedor.querySelector("h3");
-        titulo.style.color = "#1f4d2f";
-        titulo.style.textAlign = "center";
-        titulo.style.marginBottom = "20px";
-
-        const tarjetas = contenedor.querySelectorAll(".tarjeta-propuesta-js");
-
-        tarjetas.forEach(tarjeta => {
-            tarjeta.style.background = "#edf7e7";
-            tarjeta.style.padding = "18px";
-            tarjeta.style.borderRadius = "18px";
-            tarjeta.style.marginBottom = "15px";
-            tarjeta.style.borderLeft = "6px solid #6ca965";
-        });
+        contenedor.appendChild(titulo);
+        contenedor.appendChild(lista);
     }
 
     mostrarPropuestasGuardadas();
-
-
-    /* ============================= */
-    /* EFECTO EN EL VIDEO PLACEHOLDER */
-    /* ============================= */
-
-    const videoPlaceholder = document.querySelector(".video-placeholder");
-
-    if (videoPlaceholder) {
-        videoPlaceholder.addEventListener("click", function () {
-            this.innerHTML = `
-                <p>Próximamente aquí se mostrará el video oficial de SEA 🌱</p>
-            `;
-
-            this.style.transform = "scale(1.02)";
-            this.style.transition = "0.3s";
-
-            setTimeout(() => {
-                this.style.transform = "scale(1)";
-            }, 300);
-        });
-    }
 
 
     /* ============================= */
@@ -287,23 +344,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const botonArriba = document.createElement("button");
     botonArriba.textContent = "↑";
     botonArriba.classList.add("boton-arriba");
+    botonArriba.setAttribute("aria-label", "Volver arriba");
     document.body.appendChild(botonArriba);
-
-    botonArriba.style.position = "fixed";
-    botonArriba.style.right = "25px";
-    botonArriba.style.bottom = "25px";
-    botonArriba.style.width = "50px";
-    botonArriba.style.height = "50px";
-    botonArriba.style.borderRadius = "50%";
-    botonArriba.style.border = "none";
-    botonArriba.style.background = "#1f4d2f";
-    botonArriba.style.color = "white";
-    botonArriba.style.fontSize = "1.5rem";
-    botonArriba.style.fontWeight = "bold";
-    botonArriba.style.cursor = "pointer";
-    botonArriba.style.boxShadow = "0 8px 20px rgba(0, 0, 0, 0.25)";
-    botonArriba.style.display = "none";
-    botonArriba.style.zIndex = "2000";
 
     window.addEventListener("scroll", function () {
         if (window.scrollY > 500) {
@@ -322,19 +364,70 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     /* ============================= */
-    /* EFECTO DE CAMBIO EN BARRA AL BAJAR */
+    /* EFECTO DE ESCRITURA EN EL SLOGAN */
     /* ============================= */
 
-    const barra = document.querySelector(".barra-navegacion");
+    const slogan = document.querySelector(".slogan");
 
-    window.addEventListener("scroll", function () {
-        if (window.scrollY > 80) {
-            barra.style.background = "rgba(10, 45, 30, 0.97)";
-            barra.style.boxShadow = "0 5px 20px rgba(0, 0, 0, 0.25)";
-        } else {
-            barra.style.background = "rgba(10, 45, 30, 0.88)";
-            barra.style.boxShadow = "none";
+    if (slogan) {
+        const textoOriginal = slogan.textContent.trim();
+        slogan.textContent = "";
+
+        let indice = 0;
+
+        function escribirSlogan() {
+            if (indice < textoOriginal.length) {
+                slogan.textContent += textoOriginal.charAt(indice);
+                indice++;
+                setTimeout(escribirSlogan, 45);
+            }
         }
+
+        setTimeout(escribirSlogan, 600);
+    }
+
+
+    /* ============================= */
+    /* ANIMACIÓN SUAVE PARA ESPACIOS DE IMÁGENES */
+    /* ============================= */
+
+    const imagenes = document.querySelectorAll(".marco-imagen");
+
+    imagenes.forEach(imagen => {
+        imagen.addEventListener("mousemove", function (evento) {
+            const rect = this.getBoundingClientRect();
+            const x = evento.clientX - rect.left;
+            const y = evento.clientY - rect.top;
+
+            const centroX = rect.width / 2;
+            const centroY = rect.height / 2;
+
+            const rotacionX = ((y - centroY) / centroY) * -3;
+            const rotacionY = ((x - centroX) / centroX) * 3;
+
+            this.style.transform = `perspective(900px) rotateX(${rotacionX}deg) rotateY(${rotacionY}deg) scale(1.01)`;
+        });
+
+        imagen.addEventListener("mouseleave", function () {
+            this.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg) scale(1)";
+        });
+    });
+
+
+    /* ============================= */
+    /* ANIMACIÓN SUAVE PARA ICONOS PERSONALIZABLES */
+    /* ============================= */
+
+    const iconos = document.querySelectorAll(".icono-contenedor, .avatar-miembro");
+
+    iconos.forEach(icono => {
+        icono.addEventListener("mouseenter", function () {
+            this.style.transform = "scale(1.08)";
+        });
+
+        icono.addEventListener("mouseleave", function () {
+            this.style.transform = "scale(1)";
+        });
     });
 
 });

@@ -10,6 +10,7 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 95px;
 }
 
 body {
@@ -17,6 +18,16 @@ body {
     background-color: #f4f8f3;
     color: #1f2d24;
     line-height: 1.6;
+    overflow-x: hidden;
+}
+
+img {
+    width: 100%;
+    display: block;
+}
+
+a {
+    text-decoration: none;
 }
 
 /* ============================= */
@@ -26,16 +37,17 @@ body {
 .encabezado {
     min-height: 100vh;
     background:
-        linear-gradient(rgba(17, 76, 48, 0.75), rgba(17, 76, 48, 0.85)),
+        linear-gradient(rgba(17, 76, 48, 0.76), rgba(17, 76, 48, 0.88)),
         url("https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=1600&q=80");
     background-size: cover;
     background-position: center;
     color: white;
+    position: relative;
 }
 
 .barra-navegacion {
     width: 100%;
-    padding: 18px 8%;
+    padding: 16px 7%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -44,7 +56,8 @@ body {
     top: 0;
     left: 0;
     z-index: 1000;
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(10px);
+    transition: 0.3s ease;
 }
 
 .logo {
@@ -65,20 +78,52 @@ body {
 
 .menu {
     display: flex;
+    align-items: center;
     list-style: none;
-    gap: 18px;
+    gap: 16px;
 }
 
 .menu a {
     color: white;
-    text-decoration: none;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     font-weight: bold;
-    transition: 0.3s;
+    transition: 0.3s ease;
+    position: relative;
+}
+
+.menu a::after {
+    content: "";
+    width: 0;
+    height: 2px;
+    background: #d9f99d;
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    transition: 0.3s ease;
 }
 
 .menu a:hover {
-    color: #b7e86b;
+    color: #d9f99d;
+}
+
+.menu a:hover::after,
+.menu a.activo::after {
+    width: 100%;
+}
+
+.menu a.activo {
+    color: #d9f99d;
+}
+
+.boton-menu {
+    display: none;
+    background: transparent;
+    border: 2px solid #d9f99d;
+    color: #d9f99d;
+    font-size: 1.7rem;
+    border-radius: 10px;
+    padding: 4px 10px;
+    cursor: pointer;
 }
 
 /* ============================= */
@@ -87,24 +132,27 @@ body {
 
 .hero {
     min-height: 100vh;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
     align-items: center;
-    padding: 120px 8% 60px;
+    gap: 45px;
+    padding: 130px 7% 70px;
 }
 
 .hero-contenido {
-    max-width: 750px;
-    animation: aparecer 1s ease;
+    max-width: 760px;
 }
 
-.etiqueta {
+.etiqueta,
+.subtitulo-seccion {
     display: inline-block;
     background: #d9f99d;
     color: #1f4d2f;
     padding: 8px 18px;
     border-radius: 30px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
+    font-size: 0.95rem;
 }
 
 .hero h2 {
@@ -114,7 +162,7 @@ body {
 }
 
 .siglas {
-    font-size: 4.5rem;
+    font-size: 4.8rem;
     font-weight: bold;
     color: #b7e86b;
     letter-spacing: 8px;
@@ -133,7 +181,8 @@ body {
     margin-bottom: 30px;
 }
 
-.botones-hero {
+.botones-hero,
+.acciones-candidata {
     display: flex;
     gap: 15px;
     flex-wrap: wrap;
@@ -143,9 +192,9 @@ body {
 .boton-secundario {
     padding: 14px 25px;
     border-radius: 30px;
-    text-decoration: none;
     font-weight: bold;
-    transition: 0.3s;
+    transition: 0.3s ease;
+    display: inline-block;
 }
 
 .boton-principal {
@@ -169,27 +218,185 @@ body {
     transform: translateY(-4px);
 }
 
+.boton-verde {
+    color: #1f4d2f;
+    border-color: #1f4d2f;
+}
+
+.boton-verde:hover {
+    background: #1f4d2f;
+    color: white;
+}
+
+/* ============================= */
+/* ESPACIOS PARA IMÁGENES */
+/* ============================= */
+
+.marco-imagen {
+    min-height: 320px;
+    border-radius: 30px;
+    background:
+        linear-gradient(135deg, rgba(217, 249, 157, 0.85), rgba(108, 169, 101, 0.85)),
+        radial-gradient(circle at top left, #ffffff, transparent);
+    border: 3px dashed rgba(31, 77, 47, 0.45);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 25px;
+    text-align: center;
+    color: #1f4d2f;
+    font-weight: bold;
+    font-size: 1.3rem;
+
+    box-shadow: 0 18px 38px rgba(0, 0, 0, 0.16);
+    overflow: hidden;
+    transition: 0.3s ease;
+
+    position: relative;
+}
+
+/* Cuando el contenedor tenga una imagen, se oculta el texto */
+.marco-imagen:has(img) span {
+    display: none;
+}
+
+/* La imagen se adapta automáticamente al contenedor */
+.marco-imagen img {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    border-radius: inherit;
+}
+
+/* Si quieres que una imagen se vea completa sin recortarse */
+.marco-imagen.imagen-completa img {
+    object-fit: contain;
+    background-color: #edf7e7;
+    padding: 10px;
+}
+
+/* Imagen principal del inicio */
+.imagen-principal {
+    min-height: 430px;
+    border-radius: 40px;
+    background:
+        linear-gradient(135deg, rgba(31, 77, 47, 0.85), rgba(183, 232, 107, 0.75)),
+        url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1200&q=80");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    border: 3px solid rgba(255, 255, 255, 0.35);
+}
+
+/* Imagen de la candidata */
+.imagen-candidata {
+    min-height: 500px;
+    border: 4px solid #d9f99d;
+    background: #edf7e7;
+}
+
+/* ============================= */
+/* ICONOS PERSONALIZABLES */
+/* ============================= */
+
+.icono-contenedor {
+    --icono-tamano: 70px;
+
+    width: var(--icono-tamano);
+    height: var(--icono-tamano);
+    min-width: var(--icono-tamano);
+    min-height: var(--icono-tamano);
+
+    margin: 0 auto 18px;
+    border-radius: 22px;
+
+    background:
+        linear-gradient(135deg, #d9f99d, #6ca965);
+    border: 2px solid rgba(31, 77, 47, 0.22);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+    transition: 0.3s ease;
+    box-shadow: 0 8px 18px rgba(31, 77, 47, 0.18);
+}
+
+.icono-contenedor:hover {
+    transform: translateY(-5px) scale(1.06);
+    box-shadow: 0 13px 24px rgba(31, 77, 47, 0.25);
+}
+
+.icono-contenedor span {
+    color: #1f4d2f;
+    font-size: calc(var(--icono-tamano) * 0.18);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.icono-contenedor img {
+    width: 72%;
+    height: 72%;
+    object-fit: contain;
+}
+
+/* 
+Para cambiar el tamaño de cada icono desde HTML:
+
+<div class="icono-contenedor" style="--icono-tamano: 90px;">
+    <img src="imagenes/icono.png" alt="Descripción del icono">
+</div>
+
+También puedes cambiar todos los iconos juntos modificando:
+--icono-tamano: 70px;
+*/
+
 /* ============================= */
 /* SECCIONES GENERALES */
 /* ============================= */
 
 .seccion {
-    padding: 90px 8%;
+    padding: 95px 7%;
+    position: relative;
 }
 
+.encabezado-seccion {
+    text-align: center;
+    max-width: 850px;
+    margin: 0 auto 45px;
+}
+
+.encabezado-seccion h2,
 .seccion h2 {
-    text-align: center;
-    font-size: 2.5rem;
+    font-size: 2.7rem;
     color: #1f4d2f;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    line-height: 1.2;
 }
 
-.seccion > p,
-.intro-seccion {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto 35px;
-    font-size: 1.1rem;
+.encabezado-seccion p {
+    font-size: 1.08rem;
+}
+
+.bloque-doble {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+    align-items: center;
+}
+
+.bloque-invertido {
+    grid-template-columns: 0.9fr 1.1fr;
 }
 
 /* ============================= */
@@ -201,27 +408,35 @@ body {
 }
 
 .contenedor-video {
-    max-width: 900px;
+    max-width: 950px;
     margin: 0 auto;
 }
 
 .video-placeholder {
-    height: 420px;
+    height: 430px;
     background: linear-gradient(135deg, #1f4d2f, #6ca965);
-    border-radius: 25px;
+    border-radius: 30px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     font-size: 2rem;
     font-weight: bold;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 18px 38px rgba(0, 0, 0, 0.18);
+    transition: 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+    padding: 25px;
+}
+
+.video-placeholder:hover {
+    transform: scale(1.01);
 }
 
 .contenedor-video video {
     width: 100%;
-    border-radius: 25px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.18);
+    border-radius: 30px;
+    box-shadow: 0 18px 38px rgba(0, 0, 0, 0.18);
 }
 
 /* ============================= */
@@ -234,33 +449,36 @@ body {
 
 .tarjeta-destacada {
     background: white;
-    max-width: 900px;
-    margin: 0 auto 35px;
     padding: 35px;
-    border-radius: 25px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    border-radius: 28px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
     border-left: 8px solid #6ca965;
 }
 
 .tarjeta-destacada h3 {
     color: #1f4d2f;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     font-size: 1.6rem;
+}
+
+.tarjeta-destacada p {
+    margin-bottom: 12px;
 }
 
 .datos-partido {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 22px;
+    margin-top: 40px;
 }
 
 .dato {
     background: white;
-    padding: 25px;
-    border-radius: 20px;
+    padding: 26px;
+    border-radius: 22px;
     text-align: center;
-    transition: 0.3s;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.10);
+    transition: 0.3s ease;
+    box-shadow: 0 9px 22px rgba(0, 0, 0, 0.10);
 }
 
 .dato:hover {
@@ -290,14 +508,19 @@ body {
 }
 
 .contenido-seccion {
-    max-width: 850px;
-    margin: auto;
     background: white;
-    padding: 35px;
-    border-radius: 25px;
-    font-size: 1.2rem;
-    text-align: center;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.10);
+    padding: 38px;
+    border-radius: 28px;
+    font-size: 1.16rem;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.10);
+}
+
+.contenido-seccion h2 {
+    text-align: left;
+}
+
+.contenido-seccion .subtitulo-seccion {
+    margin-bottom: 12px;
 }
 
 /* ============================= */
@@ -316,22 +539,17 @@ body {
 
 .tarjeta {
     background: white;
-    padding: 30px;
-    border-radius: 25px;
+    padding: 32px;
+    border-radius: 28px;
     text-align: center;
-    transition: 0.3s;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.10);
+    transition: 0.3s ease;
+    box-shadow: 0 11px 26px rgba(0, 0, 0, 0.10);
     border-bottom: 6px solid #6ca965;
 }
 
 .tarjeta:hover {
     transform: translateY(-10px);
-    box-shadow: 0 18px 35px rgba(0, 0, 0, 0.16);
-}
-
-.icono {
-    font-size: 3rem;
-    margin-bottom: 12px;
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.16);
 }
 
 .tarjeta h3 {
@@ -348,7 +566,13 @@ body {
     color: white;
 }
 
-.objetivos h2 {
+.objetivos h2,
+.objetivos .encabezado-seccion h2 {
+    color: white;
+}
+
+.objetivos .subtitulo-seccion {
+    background: rgba(255, 255, 255, 0.18);
     color: white;
 }
 
@@ -360,12 +584,12 @@ body {
 
 .objetivo {
     background: rgba(255, 255, 255, 0.15);
-    padding: 30px;
-    border-radius: 25px;
+    padding: 32px;
+    border-radius: 28px;
     text-align: center;
     backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.25);
-    transition: 0.3s;
+    transition: 0.3s ease;
 }
 
 .objetivo:hover {
@@ -377,6 +601,62 @@ body {
     font-size: 2.8rem;
     color: #d9f99d;
     margin-bottom: 10px;
+}
+
+/* ============================= */
+/* CANDIDATA */
+/* ============================= */
+
+.candidata {
+    background:
+        radial-gradient(circle at top right, rgba(183, 232, 107, 0.25), transparent 35%),
+        linear-gradient(135deg, #ffffff, #edf7e7);
+}
+
+.perfil-candidata {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 45px;
+    align-items: center;
+}
+
+.info-candidata {
+    background: white;
+    padding: 42px;
+    border-radius: 32px;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12);
+    border-left: 8px solid #1f4d2f;
+}
+
+.cargo-candidata {
+    display: inline-block;
+    background: #d9f99d;
+    color: #1f4d2f;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-weight: bold;
+    margin-bottom: 14px;
+}
+
+.info-candidata h3 {
+    font-size: 3rem;
+    color: #1f4d2f;
+    margin-bottom: 15px;
+}
+
+.info-candidata p {
+    margin-bottom: 14px;
+}
+
+.frase-candidata {
+    background: #edf7e7;
+    border-left: 6px solid #6ca965;
+    padding: 18px;
+    border-radius: 18px;
+    margin: 22px 0;
+    font-size: 1.15rem;
+    font-weight: bold;
+    color: #1f4d2f;
 }
 
 /* ============================= */
@@ -395,22 +675,67 @@ body {
 
 .miembro {
     background: #edf7e7;
-    padding: 25px;
-    border-radius: 20px;
+    padding: 28px 20px;
+    border-radius: 24px;
     text-align: center;
-    transition: 0.3s;
+    transition: 0.3s ease;
     border: 2px solid transparent;
 }
 
 .miembro:hover {
     border-color: #6ca965;
-    transform: translateY(-6px);
+    transform: translateY(-7px);
+    box-shadow: 0 12px 26px rgba(0, 0, 0, 0.12);
+}
+
+.avatar-miembro {
+    --avatar-tamano: 65px;
+
+    width: var(--avatar-tamano);
+    height: var(--avatar-tamano);
+    margin: 0 auto 15px;
+
+    background: linear-gradient(135deg, #1f4d2f, #6ca965);
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    font-size: calc(var(--avatar-tamano) * 0.38);
+    font-weight: bold;
+    overflow: hidden;
+    transition: 0.3s ease;
+}
+
+.avatar-miembro:hover {
+    transform: scale(1.08);
+}
+
+.avatar-miembro img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .miembro h3 {
     color: #1f4d2f;
     margin-bottom: 8px;
 }
+
+/* 
+Para usar una imagen en un integrante:
+
+<div class="avatar-miembro" style="--avatar-tamano: 80px;">
+    <img src="imagenes/pablo.jpg" alt="Foto de Pablo">
+</div>
+
+Para dejar iniciales, solo usa:
+<div class="avatar-miembro">
+    <span>P</span>
+</div>
+*/
 
 /* ============================= */
 /* PROPUESTAS */
@@ -422,6 +747,13 @@ body {
 
 .propuesta {
     border-bottom: 6px solid #3b82f6;
+}
+
+.galeria-propuestas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    margin-top: 42px;
 }
 
 /* ============================= */
@@ -440,14 +772,15 @@ body {
 details {
     background: #edf7e7;
     margin-bottom: 15px;
-    padding: 20px;
-    border-radius: 18px;
+    padding: 22px;
+    border-radius: 20px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.3s ease;
 }
 
 details:hover {
     background: #dff0d6;
+    transform: translateX(5px);
 }
 
 summary {
@@ -469,12 +802,10 @@ details p {
 }
 
 .formulario {
-    max-width: 650px;
-    margin: auto;
     background: white;
-    padding: 35px;
-    border-radius: 25px;
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+    padding: 36px;
+    border-radius: 28px;
+    box-shadow: 0 13px 30px rgba(0, 0, 0, 0.12);
 }
 
 .formulario label {
@@ -493,11 +824,13 @@ details p {
     border-radius: 14px;
     font-size: 1rem;
     outline: none;
+    transition: 0.3s ease;
 }
 
 .formulario input:focus,
 .formulario textarea:focus {
     border-color: #6ca965;
+    box-shadow: 0 0 0 4px rgba(108, 169, 101, 0.15);
 }
 
 .formulario button {
@@ -510,12 +843,67 @@ details p {
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
-    transition: 0.3s;
+    transition: 0.3s ease;
 }
 
 .formulario button:hover {
     background: #397348;
     transform: translateY(-3px);
+}
+
+/* ============================= */
+/* PROPUESTAS GUARDADAS CON JS */
+/* ============================= */
+
+.propuestas-guardadas {
+    max-width: 850px;
+    margin: 35px auto 0;
+    background: white;
+    padding: 25px;
+    border-radius: 25px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.propuestas-guardadas h3 {
+    color: #1f4d2f;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.tarjeta-propuesta-js {
+    background: #edf7e7;
+    padding: 18px;
+    border-radius: 18px;
+    margin-bottom: 15px;
+    border-left: 6px solid #6ca965;
+}
+
+/* ============================= */
+/* BOTÓN VOLVER ARRIBA */
+/* ============================= */
+
+.boton-arriba {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: none;
+    background: #1f4d2f;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    display: none;
+    z-index: 2000;
+    transition: 0.3s ease;
+}
+
+.boton-arriba:hover {
+    background: #6ca965;
+    transform: translateY(-5px);
 }
 
 /* ============================= */
@@ -526,7 +914,7 @@ details p {
     background: #0f2f1f;
     color: white;
     text-align: center;
-    padding: 30px 8%;
+    padding: 34px 8%;
 }
 
 .pie-pagina p {
@@ -534,32 +922,79 @@ details p {
 }
 
 /* ============================= */
-/* ANIMACIONES */
+/* ANIMACIONES SUAVES */
 /* ============================= */
 
-@keyframes aparecer {
+.animado {
+    opacity: 0;
+    transform: translateY(45px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.animado-izquierda {
+    transform: translateX(-55px);
+}
+
+.animado-derecha {
+    transform: translateX(55px);
+}
+
+.animado.visible,
+.animado-izquierda.visible,
+.animado-derecha.visible {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+
+/* Animación inicial del hero */
+
+.hero-contenido {
+    animation: entradaHero 1s ease forwards;
+}
+
+.hero-imagen {
+    animation: entradaImagen 1.1s ease forwards;
+}
+
+@keyframes entradaHero {
     from {
         opacity: 0;
-        transform: translateY(35px);
+        transform: translateX(-45px);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateX(0);
+    }
+}
+
+@keyframes entradaImagen {
+    from {
+        opacity: 0;
+        transform: translateX(45px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
     }
 }
 
 /* ============================= */
-/* DISEÑO RESPONSIVE */
+/* RESPONSIVE */
 /* ============================= */
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1180px) {
     .menu {
-        gap: 12px;
+        gap: 11px;
     }
 
     .menu a {
-        font-size: 0.85rem;
+        font-size: 0.82rem;
+    }
+
+    .hero h2 {
+        font-size: 3.4rem;
     }
 
     .grid-tarjetas,
@@ -568,44 +1003,104 @@ details p {
     .grid-equipo {
         grid-template-columns: repeat(2, 1fr);
     }
-
-    .hero h2 {
-        font-size: 3.2rem;
-    }
 }
 
-@media screen and (max-width: 760px) {
+@media screen and (max-width: 900px) {
+    .boton-menu {
+        display: block;
+    }
+
     .barra-navegacion {
-        flex-direction: column;
-        gap: 15px;
-        padding: 15px 5%;
+        padding: 14px 6%;
     }
 
     .menu {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
+        position: absolute;
+        top: 75px;
+        left: 0;
+        width: 100%;
+        background: rgba(10, 45, 30, 0.97);
+        flex-direction: column;
+        gap: 0;
+        padding: 15px 0;
+        display: none;
     }
 
-    .hero {
-        padding-top: 190px;
+    .menu.activo {
+        display: flex;
+    }
+
+    .menu li {
+        width: 100%;
         text-align: center;
     }
 
+    .menu a {
+        display: block;
+        padding: 12px;
+        font-size: 0.95rem;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-top: 120px;
+    }
+
+    .botones-hero,
+    .acciones-candidata {
+        justify-content: center;
+    }
+
+    .hero-contenido {
+        margin: auto;
+    }
+
+    .bloque-doble,
+    .bloque-invertido,
+    .perfil-candidata,
+    .galeria-propuestas {
+        grid-template-columns: 1fr;
+    }
+
+    .contenido-seccion h2 {
+        text-align: center;
+    }
+
+    .imagen-principal,
+    .imagen-candidata {
+        min-height: 360px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    html {
+        scroll-padding-top: 85px;
+    }
+
+    .seccion {
+        padding: 75px 6%;
+    }
+
+    .hero {
+        padding: 115px 6% 60px;
+    }
+
     .hero h2 {
-        font-size: 2.5rem;
+        font-size: 2.45rem;
     }
 
     .siglas {
         font-size: 3.5rem;
     }
 
-    .botones-hero {
-        justify-content: center;
+    .slogan {
+        font-size: 1.2rem;
     }
 
-    .seccion {
-        padding: 70px 6%;
+    .encabezado-seccion h2,
+    .seccion h2 {
+        font-size: 2.1rem;
     }
 
     .grid-tarjetas,
@@ -616,9 +1111,33 @@ details p {
     }
 
     .video-placeholder {
-        height: 280px;
-        font-size: 1.4rem;
-        text-align: center;
-        padding: 20px;
+        height: 270px;
+        font-size: 1.35rem;
+    }
+
+    .marco-imagen,
+    .imagen-principal,
+    .imagen-candidata {
+        min-height: 280px;
+    }
+
+    .info-candidata {
+        padding: 30px 24px;
+    }
+
+    .info-candidata h3 {
+        font-size: 2.4rem;
+    }
+
+    .formulario {
+        padding: 28px 22px;
+    }
+
+    .icono-contenedor {
+        --icono-tamano: 62px;
+    }
+
+    .avatar-miembro {
+        --avatar-tamano: 58px;
     }
 }
